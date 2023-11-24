@@ -12,7 +12,7 @@ export const SearchResultItemLink = styled.div`
 `
 
 export const SearchResultItemTitle = styled.div`
-  color: #81aef8;
+  color: ${props => props.$active ? '#6f029a' : '#81aef8'};
   cursor: pointer;
 `
 

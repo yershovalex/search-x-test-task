@@ -14,7 +14,7 @@ export const SearchItem = styled.div`
 `
 
 export const SearchItemText = styled.div`
-  color: ${props => props.active ? '#6f029a' : '#000'};
+  color: ${props => props.$active ? '#6f029a' : '#000'};
 `
 
 export const RemoveButton = styled.div`

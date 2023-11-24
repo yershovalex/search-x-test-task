@@ -1,8 +1,10 @@
 import {useEffect} from "react";
 
-export const useSearch = (data, searchValue, setResults) => {
+export const useSearch = (isLiveSearchActive, data, searchValue, setResults) => {
     useEffect(() => {
         const filterSearch = () => {
+            if (!isLiveSearchActive) return;
+
             let result = [];
 
             if (searchValue.trim().length < 2) {

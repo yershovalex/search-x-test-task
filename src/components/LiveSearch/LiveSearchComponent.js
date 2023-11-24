@@ -1,36 +1,23 @@
 import React, {useState} from 'react';
 import {LiveSearchWrapper} from "./styled";
 import LiveSearchItem from "./LiveSearchItem/LiveSearchItem";
+import {isVisited, removeSearchItemFromVisited} from "../../utils/utils";
 
 const LiveSearchComponent = ({liveSearch, handleLiveSearchClick}) => {
     // in real components we get data from a database or other places, it would be desirable
     // to set the “visited” flags, but in this case we store the data in local storage,
     // and when we delete an element from it, redrawing will not happen, so “refresh” - is a hack
     // that should not be used outside of this test task
-    const [refresh, setRefresh] = useState(false);
-
-    const isVisited = (id) => {
-        const visitedStorage = localStorage.getItem('visitedLinks');
-        const visitedArr = visitedStorage ? JSON.parse(visitedStorage) : []
-        return visitedArr.includes(id)
-    }
+    const [_, setRefresh] = useState(false);
 
     const removeFromVisited = (e, id) => {
         e.stopPropagation();
-        const visitedStorage = localStorage.getItem('visitedLinks');
-        const visitedArr = visitedStorage ? JSON.parse(visitedStorage) : []
-        const index = visitedArr.findIndex(item => item === id)
-
-        if (index !== -1) {
-            visitedArr.splice(index, 1)
-        }
-
-        localStorage.setItem('visitedLinks', JSON.stringify(visitedArr))
+        removeSearchItemFromVisited(id)
         setRefresh((prevState) => !prevState);
     }
 
     return (
-        <LiveSearchWrapper liveSearch={liveSearch}>
+        <LiveSearchWrapper $liveSearch={liveSearch?.length >= 2}>
             {
                 liveSearch.map(item => {
                     return <LiveSearchItem

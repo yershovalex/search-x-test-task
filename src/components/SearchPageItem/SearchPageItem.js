@@ -7,12 +7,13 @@ import {
 } from "./styled";
 
 const SearchPageItem = (props) => {
-    const {title, description, link} = props.item;
+    const { id, title, description, link } = props.item;
+    const { isVisited } = props;
 
     return (
         <SearchResultItemContainer>
             <SearchResultItemLink>{link}</SearchResultItemLink>
-            <SearchResultItemTitle>{title}</SearchResultItemTitle>
+            <SearchResultItemTitle $active={isVisited(id)}>{title}</SearchResultItemTitle>
             <SearchResultItemDescription>{description}</SearchResultItemDescription>
         </SearchResultItemContainer>
     );

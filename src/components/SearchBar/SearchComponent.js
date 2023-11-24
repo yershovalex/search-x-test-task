@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
-import {SearchInput, SearchWrapper} from "./styled";
+import {SearchIcon, SearchInput, SearchWrapper} from "./styled";
 import LiveSearchComponent from "../LiveSearch/LiveSearchComponent";
 import {useSearch} from "../../hooks/useSearch";
 import mockedSearch from "../../mock/mockedSearch.json";
 
 const SearchComponent = ({autoFocus, handleSearch}) => {
+    const [isLiveSearchActive, setIsLiveSearchActive] = useState(false);
     const [searchValue, setSearchValue] = useState('');
     const [liveSearch, setLiveSearch] = useState([]);
-    useSearch(mockedSearch, searchValue, setLiveSearch);
+    useSearch(isLiveSearchActive, mockedSearch, searchValue, setLiveSearch);
 
     const storeVisitedLinks = (id) => {
         const visitedStorage = localStorage.getItem('visitedLinks');
@@ -18,14 +19,16 @@ const SearchComponent = ({autoFocus, handleSearch}) => {
         }
     }
 
+    const disableAndClearLiveSearch = () => {
+        setIsLiveSearchActive(prevState => !prevState);
+        setLiveSearch([])
+    }
+
     const handleLiveSearchClick = (item) => {
         setSearchValue(item.title)
         handleSearch(item.title);
         storeVisitedLinks(item.id);
-
-        setTimeout(() => {
-            setLiveSearch([]);
-        }, 100);
+        disableAndClearLiveSearch();
     }
 
     return (
@@ -33,6 +36,8 @@ const SearchComponent = ({autoFocus, handleSearch}) => {
             <SearchInput
                 type="text"
                 value={searchValue}
+                $liveSearch={liveSearch.length >= 2}
+                onFocus={() => setIsLiveSearchActive(true)}
                 onChange={(e) => setSearchValue(e.target.value)}
                 autoFocus={autoFocus ?? false}
                 onKeyDown={(e) => {
@@ -41,6 +46,7 @@ const SearchComponent = ({autoFocus, handleSearch}) => {
                     }
                 }}
             />
+            <SearchIcon onClick={() => handleSearch(searchValue)}/>
             <LiveSearchComponent
                 liveSearch={liveSearch}
                 handleLiveSearchClick={handleLiveSearchClick}/>

@@ -25,7 +25,7 @@ export const SearchPageHeaderTitle = styled(Link)`
 
 export const SearchPageWrapper = styled.div`
   display: flex;
-  width: 70vw;
+  width: 50vw;
   margin: 0 auto;
   flex-direction: column;
   align-items: center;

@@ -4,6 +4,7 @@ import mockedSearch from "../../mock/mockedSearch.json";
 import SearchPageItem from "../../components/SearchPageItem/SearchPageItem";
 import {InfoContainer, SearchPageHeader, SearchPageHeaderTitle, SearchPageWrapper} from "./styled";
 import SearchComponent from "../../components/SearchBar/SearchComponent";
+import {isVisited} from "../../utils/utils";
 
 const SearchPage = () => {
     const navigate = useNavigate();
@@ -39,7 +40,7 @@ const SearchPage = () => {
             <InfoContainer>Results: {searchResults.length}</InfoContainer>
             {
                 searchResults.map((item) => {
-                    return <SearchPageItem key={item.id} item={item}/>
+                    return <SearchPageItem key={item.id} item={item} isVisited={isVisited}/>
                 })
             }
         </SearchPageWrapper>
