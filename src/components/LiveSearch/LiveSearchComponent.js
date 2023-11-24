@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {LiveSearchWrapper} from "./styled";
 import LiveSearchItem from "./LiveSearchItem/LiveSearchItem";
-import {isVisited, removeFromVisited, removeSearchItemFromVisited} from "../../utils/utils";
+import {isVisited, removeFromVisited} from "../../utils/utils";
 
 const LiveSearchComponent = ({liveSearch, handleLiveSearchClick}) => {
     // in real components we get data from a database or other places, it would be desirable

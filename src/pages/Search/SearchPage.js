@@ -24,7 +24,7 @@ const SearchPage = () => {
 
     useEffect(() => {
         const filteredSearch = mockedSearch.results.filter(item => {
-            return item.title.toLowerCase().startsWith(searchQuery?.trim()?.toLowerCase())
+            return item.title.trim().toLowerCase().startsWith(searchQuery?.trim()?.toLowerCase())
         })
 
         setSearchResults(filteredSearch);
@@ -35,7 +35,7 @@ const SearchPage = () => {
         <SearchPageWrapper>
             <SearchPageHeader>
                 <SearchPageHeaderTitle to="/">Search X</SearchPageHeaderTitle>
-                <SearchComponent autoFocus={false} handleSearch={handleSearch}/>
+                <SearchComponent value={searchQuery} autoFocus={false} handleSearch={handleSearch}/>
             </SearchPageHeader>
             <InfoContainer>Results: {searchResults.length}</InfoContainer>
             {

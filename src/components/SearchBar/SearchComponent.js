@@ -4,9 +4,9 @@ import LiveSearchComponent from "../LiveSearch/LiveSearchComponent";
 import {useSearch} from "../../hooks/useSearch";
 import mockedSearch from "../../mock/mockedSearch.json";
 
-const SearchComponent = ({autoFocus, handleSearch}) => {
+const SearchComponent = ({value, autoFocus, handleSearch}) => {
     const [isLiveSearchActive, setIsLiveSearchActive] = useState(false);
-    const [searchValue, setSearchValue] = useState('');
+    const [searchValue, setSearchValue] = useState(value ?? '');
     const [liveSearch, setLiveSearch] = useState([]);
     useSearch(isLiveSearchActive, mockedSearch, searchValue, setLiveSearch);
 
@@ -43,6 +43,7 @@ const SearchComponent = ({autoFocus, handleSearch}) => {
                 onKeyDown={(e) => {
                     if (e.key === "Enter") {
                         handleSearch(searchValue)
+                        disableAndClearLiveSearch();
                     }
                 }}
             />

@@ -11,7 +11,7 @@ export const useSearch = (isLiveSearchActive, data, searchValue, setResults) => 
                 result = [];
             } else if (searchValue.trim().length >= 2) {
                 result = data.results.filter(item => {
-                    return item.title.toLowerCase().startsWith(searchValue.trim().toLowerCase())
+                    return item.title.trim().toLowerCase().startsWith(searchValue.trim().toLowerCase())
                 })
             }
 
