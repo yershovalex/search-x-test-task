@@ -7,7 +7,9 @@ const HomePage = () => {
     const navigate = useNavigate();
 
     const handleSearch = (searchValue) => {
-        navigate(`/search?q=${searchValue}`);
+        if (searchValue.trim().length !== 0) {
+            navigate(`/search?q=${searchValue}`);
+        }
     }
 
     return (
