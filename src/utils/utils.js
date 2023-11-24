@@ -18,3 +18,12 @@ export const removeSearchItemFromVisited = (id) => {
 
     localStorage.setItem('visitedLinks', JSON.stringify(visitedArr))
 }
+
+export const removeFromVisited = (e, id, callback) => {
+    e.stopPropagation();
+    removeSearchItemFromVisited(id)
+
+    if (callback) {
+        callback((prevState) => !prevState);
+    }
+}

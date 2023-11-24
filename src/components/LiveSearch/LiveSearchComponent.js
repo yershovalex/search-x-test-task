@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {LiveSearchWrapper} from "./styled";
 import LiveSearchItem from "./LiveSearchItem/LiveSearchItem";
-import {isVisited, removeSearchItemFromVisited} from "../../utils/utils";
+import {isVisited, removeFromVisited, removeSearchItemFromVisited} from "../../utils/utils";
 
 const LiveSearchComponent = ({liveSearch, handleLiveSearchClick}) => {
     // in real components we get data from a database or other places, it would be desirable
@@ -9,12 +9,6 @@ const LiveSearchComponent = ({liveSearch, handleLiveSearchClick}) => {
     // and when we delete an element from it, redrawing will not happen, so “refresh” - is a hack
     // that should not be used outside of this test task
     const [_, setRefresh] = useState(false);
-
-    const removeFromVisited = (e, id) => {
-        e.stopPropagation();
-        removeSearchItemFromVisited(id)
-        setRefresh((prevState) => !prevState);
-    }
 
     return (
         <LiveSearchWrapper $liveSearch={liveSearch?.length >= 2}>
@@ -26,6 +20,7 @@ const LiveSearchComponent = ({liveSearch, handleLiveSearchClick}) => {
                         handleLiveSearchClick={handleLiveSearchClick}
                         isVisited={isVisited}
                         removeFromVisited={removeFromVisited}
+                        setRefresh={setRefresh}
                     />
                 })
             }
